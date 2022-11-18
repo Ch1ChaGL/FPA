@@ -1,0 +1,4 @@
+﻿  Source.cpp
+C:\Users\User\source\repos\ЗаданиеОАП23\ЗаданиеОАП23\Source.cpp(35,13): warning C4326: возвращаемый тип "main" должен быть "int", а не "void"
+C:\Users\User\source\repos\ЗаданиеОАП23\ЗаданиеОАП23\Source.cpp(37,6): warning C4101: a: неиспользованная локальная переменная
+  ЗаданиеОАП23.vcxproj -> C:\Users\User\source\repos\ЗаданиеОАП23\x64\Debug\ЗаданиеОАП23.exe
