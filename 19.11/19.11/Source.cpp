@@ -29,12 +29,12 @@ void main() {
 
 	Student students[N];
 
-	/*for (int i = 0; i < N; i++) {
+	for (int i = 0; i < N; i++) {
 		cin >> students[i].n_z;
 		cin >> students[i].opl;
 		cin >> students[i].FIO;
 	}
-	for (int i = 0; i < N; i++) {
+	/*for (int i = 0; i < N; i++) {
 		cout << students[i].n_z<<endl;
 		cout << students[i].opl<<endl;
 		cout << students[i].FIO<<endl;
@@ -64,7 +64,7 @@ void main() {
 	p->n_z = 334;//тоже самое что и выше
 	
 	int n = 5;
-	Student *gr = students; //Выделение памяти под динамический массив студентов
+	Student *gr = new Student[n]; //Выделение памяти под динамический массив студентов
 
 	/*for (int i = 0; i < n; i++)
 	{
@@ -72,17 +72,20 @@ void main() {
 		cin >> gr[i].n_z;
 		cin >> gr[i].opl;
 
-	}
-	for (int i = 0; i < n; i++)
-	{
+	}*/
+	for (int i = 0; i < N; i++)
+	{		
+		cin >> gr[i].FIO;
+		cin >> gr[i].n_z;
+		cin >> gr[i].opl;
 		
 		cout << gr[i].FIO << endl;;
 		cout << gr[i].n_z<<endl;
 		cout << gr[i].opl<<endl;
 
 	}
-*/
-	for (Student*pnt = gr; pnt<gr+n; pnt++)
+
+	/*for (Student*pnt = gr; pnt<gr+n; pnt++)
 	{
 		cin >> p->n_z;
 		
@@ -90,7 +93,7 @@ void main() {
 	for (Student*pnt = gr; pnt < gr + n; pnt++)
 	{
 		cout << p->n_z;
-	}
+	}*/
 	
 	system("PAUSE");
 }
