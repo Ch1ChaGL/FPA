@@ -1,4 +1,4 @@
 ﻿  main.cpp
-C:\Users\User\source\repos\тест\тест\main.cpp(215,23): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\User\source\repos\тест\тест\main.cpp(261,24): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\User\source\repos\тест\тест\main.cpp(221,23): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\User\source\repos\тест\тест\main.cpp(379,24): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
   тест.vcxproj -> C:\Users\User\source\repos\тест\x64\Debug\тест.exe

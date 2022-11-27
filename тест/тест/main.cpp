@@ -22,6 +22,7 @@ struct Node
 };
 
 struct list {
+	int size = 0;
 	Node* first;
 	Node* last;
 	list() : first(nullptr), last(nullptr) {};
@@ -35,11 +36,13 @@ struct list {
 		//Если список пустой, то присвоим указателю на первый и последний элмент новый адресс
 		if (_addres == "" || _price == 0 || _countRoom == 0) return;
 		if (is_empty()) {
+			size++;
 			first = p;
 			last = p;
 			return;
 		}
 		//Если список не пустой
+		size++;
 		last->next = p;
 		last = p;
 	}
@@ -50,7 +53,7 @@ struct list {
 		if (is_empty()) return;
 		Node* p = first;
 		while (p) {
-			fs1 << "Адресс: " << p->addres<<"," << " Цена: " << p->price << "," << " Количество комнат: " << p->countRoom << endl;
+			fs1 << "Адресс: " << p->addres<<"," << " Цена: " <<p->price << "," << " Количество комнат: " << p->countRoom << endl;
 			p = p->next;
 		}
 		fs1.close();
@@ -81,6 +84,7 @@ struct list {
 		if (is_empty()) return;
 		Node* p = first;
 		first = p->next;
+		size--;
 		delete p;
 	}
 	
@@ -92,6 +96,7 @@ struct list {
 			remove_first();
 			return;
 		}
+		size--;
 		Node* p = first;
 		while (p->next != last) p = p->next;
 		p->next = nullptr;
@@ -123,6 +128,7 @@ struct list {
 			return;
 		}
 		pFirst->next = pNext->next;
+		size--;
 		delete pNext;
 
 	}
@@ -217,6 +223,118 @@ struct list {
 			}
 		}
 	}
+	/*void sort() {
+		for (int i = 1; i < size - 1; i++) {
+			Node* pFirst = first;
+			Node* pNext = first->next;
+			Node* pFictiv = first;
+			for (int j = 1; j < size - 1; j++) {					
+				if(pNext->countRoom < pFirst->countRoom){					
+					if (i == 1) {
+						pFirst->next = pNext->next;
+						pNext->next = pFirst;
+					}
+					else {
+						pFirst->next = pNext->next;
+						pNext->next = pFirst;
+						pFictiv->next = pNext;
+					}
+				}
+				if (j % 2 != 0) {
+					pFictiv->next = pNext->next;
+				}
+				pFirst = pFirst->next;
+				pNext = pNext->next;
+			}
+		}
+	}*/
+	void slist_for_countRoom() {
+		Node* t, * m, * a, * b;
+		if (first == NULL)
+			return;
+
+		for (bool go = true; go; ) {
+			go = false;
+			a = t = first;
+			b = first->next;
+
+			while (b != NULL) {
+				if (a->countRoom > b->countRoom) {
+					if (t == a)
+						first = b;
+					else
+						t->next = b;
+
+					a->next = b->next;
+					b->next = a;
+
+					m = a, a = b, b = m;
+					go = true;
+				}
+				t = a;
+				a = a->next;
+				b = b->next;
+			}
+		}
+	}
+	void slist_for_price() {
+		Node* t, * m, * a, * b;
+		if (first == NULL)
+			return;
+
+		for (bool go = true; go; ) {
+			go = false;
+			a = t = first;
+			b = first->next;
+
+			while (b != NULL) {
+				if (a->price > b->price) {
+					if (t == a)
+						first = b;
+					else
+						t->next = b;
+
+					a->next = b->next;
+					b->next = a;
+
+					m = a, a = b, b = m;
+					go = true;
+				}
+				t = a;
+				a = a->next;
+				b = b->next;
+			}
+		}
+	}
+	void slist_for_addres() {
+		Node* t, * m, * a, * b;
+		if (first == NULL)
+			return;
+
+		for (bool go = true; go; ) {
+			go = false;
+			a = t = first;
+			b = first->next;
+
+			while (b != NULL) {
+				if (a->addres > b->addres) {
+					if (t == a)
+						first = b;
+					else
+						t->next = b;
+
+					a->next = b->next;
+					b->next = a;
+
+					m = a, a = b, b = m;
+					go = true;
+				}
+				t = a;
+				a = a->next;
+				b = b->next;
+			}
+		}
+	}
 };
 
 
@@ -244,26 +362,27 @@ int main() {
 		l.copy_in_list();
 		while (true) {
 			int answer;
-			cout << "1.Записать в блокнот\n2.Вывести список на экран\n3.Удалить из списка\n4.Выход" << endl;
+			cout << "1.Записать в блокнот\n2.Вывести список на экран\n3.Удалить из списка\n4.Cортировка.\n5.Выход" << endl;
 			cin >> answer;
 			switch (answer)
 			{
 			case 1: {
 				string addres;
 				double price;
-				int countRoom;
-				cout << "Введите адресс" << endl;
-				cin >> addres;
+				int countRoom;				
 				cout << "Введите цену" << endl;
 				cin >> price;
 				cout << "Введите количество комнат" << endl;
 				cin >> countRoom;
+				cout << "Введите адресс" << endl;
+				cin >> addres;
 				l.push_back(addres,price,countRoom);
 				l.print_in_file();
 				break;
 			}
 			case 2: {
 				l.print();
+				cout << "Всего записей = " << l.size << endl;
 				break;
 			}
 			case 3: {
@@ -274,9 +393,32 @@ int main() {
 				l.print_in_file();
 				break;
 			}
-			case 4: {
+			case 5: {
 				l.print_in_file();
 				return 0;
+				
+			}
+			case 4: {
+				int answer;
+				cout << "Выберите варинат сортировки \n1.По комнатам\n2.По алфавиту\n3.По цене" << endl;
+				cin >> answer;
+				if (answer == 1) {
+					l.slist_for_countRoom();
+					l.print_in_file();
+					break;
+				}if (answer == 2) {
+					l.slist_for_addres();
+					l.print_in_file();
+					break;
+				}if (answer == 3) {
+					l.slist_for_price();
+					l.print_in_file();
+					break;
+				}
+				else {
+					cout << "Нет такого ответа" << endl;
+					break;
+				}
 				
 			}
 			default:
